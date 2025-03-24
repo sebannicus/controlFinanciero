@@ -10,6 +10,23 @@
 <body class="bg-light">
     <div class="container text-center mt-5">
         <h1>Bienvenido al Control Financiero</h1>
+
+        <!-- Bloque de autenticación -->
+        <div class="mt-3">
+            {% if user.is_authenticated %}
+                <p>Bienvenido, <strong>{{ user.username }}</strong> |
+                    <!-- Formulario para logout con método POST -->
+                    <form action="{% url 'logout' %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Cerrar Sesión</button>
+                    </form>
+                </p>
+            {% else %}
+                <a href="{% url 'login' %}" class="btn btn-primary">Iniciar Sesión</a>
+            {% endif %}
+        </div>
+
+        <!-- Botones de navegación -->
         <a href="{% url 'agregar_transaccion' %}" class="btn btn-primary mt-3">Agregar Transacción</a>
         <a href="{% url 'listar_transacciones' %}" class="btn btn-success mt-3">Ver Transacciones</a>
     </div>

@@ -5,6 +5,9 @@ class Usuario(models.Model):
     correo = models.EmailField(unique=True)
     contraseña = models.CharField(max_length=25)
 
+    class Meta:
+        db_table = 'usuarios' #forzar a django a usar esta tabla
+
     def __str__(self):
         return self.nombre
     
